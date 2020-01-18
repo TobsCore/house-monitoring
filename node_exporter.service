@@ -1,0 +1,9 @@
+[Unit]
+Description=Node Exporter
+
+[Service]
+Type=simple
+ExecStart=/PATH/TO/node_exporter --collector.wifi --web.listen-address=":9100"
+
+[Install]
+WantedBy=multi-user.target
