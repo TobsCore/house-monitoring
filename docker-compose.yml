@@ -1,0 +1,51 @@
+version: "3"
+networks:
+        monitor-net:
+                driver: bridge
+
+services:
+        hue-exporter:
+                image: mitchellrj/hue_exporter:latest-arm7
+                ports:
+                        - "9100:9366"
+                volumes:
+                        - ./hue-exporter-config.yml:/etc/hue_exporter/config.yml
+                restart: unless-stopped
+
+        prometheus:
+                image: rycus86/prometheus:armhf
+                ports:
+                        - "4000:9090"
+                volumes:
+                        - $PWD/data/prometheus:/prometheus
+                        - ./prometheus.yml:/etc/prometheus/prometheus.yml
+                restart: unless-stopped
+
+        grafana:
+                image: grafana/grafana
+                ports:
+                        - "3000:3000"
+                volumes:
+                        - ./data/grafana:/var/lib/grafana/
+                restart: unless-stopped
+                user: "1001:1001"
+                networks:
+                        - monitor-net
+
+        nodeexporter:
+                image: prom/node-exporter:latest
+                user: root
+                privileged: true
+                volumes:
+                        - /proc:/host/proc:ro
+                        - /sys:/host/sys:ro
+                        - /:/rootfs:ro
+                command:
+                        - '--path.procfs=/host/proc'
+                        - '--path.sysfs=/host/sys'
+                        - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
+                restart: unless-stopped
+                ports:
+                        - "9000:9100"
+                networks:
+                        - monitor-net
