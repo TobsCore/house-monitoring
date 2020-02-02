@@ -17,7 +17,7 @@
   "gnetId": 11074,
   "graphTooltip": 0,
   "id": 2,
-  "iteration": 1580515832656,
+  "iteration": 1580677486281,
   "links": [
     {
       "asDropdown": false,
@@ -1653,6 +1653,115 @@
       }
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "decimals": 1,
+      "description": "",
+      "fill": 4,
+      "fillGradient": 4,
+      "gridPos": {
+        "h": 10,
+        "w": 16,
+        "x": 8,
+        "y": 22
+      },
+      "hiddenSeries": false,
+      "id": 181,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "topk( 10, sum by (groupname) (irate(namedprocess_namegroup_cpu_seconds_total[5m])))",
+          "format": "time_series",
+          "instant": false,
+          "legendFormat": "{{ groupname }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [
+        {
+          "colorMode": "custom",
+          "fill": true,
+          "fillColor": "rgba(250, 100, 0, 0.2)",
+          "line": false,
+          "lineColor": "rgba(31, 96, 196, 0.6)",
+          "op": "gt",
+          "value": null,
+          "yaxis": "left"
+        }
+      ],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Current CPU Usage",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percentunit",
+          "label": "CPU usage",
+          "logBase": 1,
+          "max": "1",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "aliasColors": {
         "vda_write": "#6ED0E0"
       },
@@ -1666,8 +1775,8 @@
       "gridPos": {
         "h": 9,
         "w": 8,
-        "x": 8,
-        "y": 22
+        "x": 0,
+        "y": 31
       },
       "height": "300",
       "hiddenSeries": false,
@@ -1769,6 +1878,98 @@
       }
     },
     {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 16,
+        "x": 8,
+        "y": 32
+      },
+      "hiddenSeries": false,
+      "id": 179,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "node_wifi_station_receive_bits_per_second",
+          "legendFormat": "Receive Bits/s",
+          "refId": "A"
+        },
+        {
+          "expr": "node_wifi_station_transmit_bits_per_second",
+          "legendFormat": "Transmit Bits/s",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Router Connection Speed",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "aliasColors": {
         "vda": "#6ED0E0"
       },
@@ -1782,8 +1983,8 @@
       "gridPos": {
         "h": 9,
         "w": 8,
-        "x": 16,
-        "y": 22
+        "x": 0,
+        "y": 40
       },
       "height": "300",
       "hiddenSeries": false,
@@ -1896,10 +2097,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 12,
-        "w": 12,
-        "x": 0,
-        "y": 31
+        "h": 9,
+        "w": 8,
+        "x": 8,
+        "y": 40
       },
       "height": "300",
       "hiddenSeries": false,
@@ -2022,107 +2223,15 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 31
-      },
-      "hiddenSeries": false,
-      "id": 179,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "node_wifi_station_receive_bits_per_second",
-          "legendFormat": "Receive Bits/s",
-          "refId": "A"
-        },
-        {
-          "expr": "node_wifi_station_transmit_bits_per_second",
-          "legendFormat": "Transmit Bits/s",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Router Connection Speed",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "bps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": "Prometheus",
       "description": "",
       "fill": 0,
       "fillGradient": 1,
       "gridPos": {
-        "h": 12,
-        "w": 12,
-        "x": 12,
-        "y": 39
+        "h": 9,
+        "w": 8,
+        "x": 16,
+        "y": 40
       },
       "hiddenSeries": false,
       "id": 169,
@@ -2208,7 +2317,7 @@
       }
     }
   ],
-  "refresh": "5s",
+  "refresh": "10s",
   "schemaVersion": 21,
   "style": "dark",
   "tags": [
@@ -2382,7 +2491,7 @@
     ]
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -2414,5 +2523,5 @@
   "timezone": "browser",
   "title": "Raspberry Pi",
   "uid": "hb7fSE0Zz",
-  "version": 9
+  "version": 11
 }
