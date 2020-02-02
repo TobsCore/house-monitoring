@@ -12,3 +12,7 @@ scrape_configs:
       scrape_interval: 10s
       static_configs:
               - targets: ['hue-exporter:9366']
+                
+    - job_name: 'processes'
+      static_configs:
+              - targets: ['dockerhost:9256']

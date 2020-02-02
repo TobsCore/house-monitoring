@@ -1,0 +1,10 @@
+[Unit]
+Description=Process Exporter
+
+[Service]
+Type=simple
+# Get from: https://github.com/ncabatoff/process-exporter
+ExecStart=/home/tobscore/bin/process-exporter -config.path /home/tobscore/monitoring/process-config.yml -web.listen-address :9256
+
+[Install]
+WantedBy=multi-user.target
