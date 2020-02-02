@@ -43,17 +43,3 @@ services:
                 user: "1001:1001"
                 networks:
                         - monitor-net
-
-        organizr:
-                image: organizrtools/organizr-v2:armhf
-                ports:
-                        - "8080:80"
-                container_name: organizr
-                volumes:
-                        - ./data/organizr:/config
-                restart: unless-stopped
-                environment:
-                        - PGID=1001
-                        - PUID=1001
-                networks:
-                        - monitor-net
