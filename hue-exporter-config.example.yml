@@ -1,4 +1,4 @@
-ip_address: 192.168.0.10
+ip_address: 192.168.0.1 # Enter the IP address of Philips Hue bridge
 api_key: "<ADD_YOUR_SECRET_TOKEN_HERE>"
 sensors:
   # With `match_names` set, the exporter will set the names of temperature
