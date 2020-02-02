@@ -43,3 +43,14 @@ services:
                 user: "1001:1001"
                 networks:
                         - monitor-net
+
+        temp-exporter:
+                image: carlosedp/arm_exporter
+                container_name: temp-exporter
+                expose: 
+                        - "9243"
+                ports:
+                        - "9243:9243"
+                restart: unless-stopped
+                networks:
+                        - monitor-net
