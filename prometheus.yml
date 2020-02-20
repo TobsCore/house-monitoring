@@ -20,3 +20,7 @@ scrape_configs:
     - job_name: 'raspberry-temperature'
       static_configs:
               - targets: ['temp-exporter:9243']
+                
+    - job_name: 'deconz'
+      static_configs:
+              - targets: ['dockerhost:2112']

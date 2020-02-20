@@ -1,0 +1,14 @@
+[Unit]
+Description=Process Exporter
+
+[Service]
+Type=simple
+# Get from https://github.com/TobsCore/deconz-exporter
+ExecStart=/home/tobscore/bin/deconz-exporter
+Environment=DECONZ_HOST=192.168.0.222
+Environment=DECONZ_PORT=1702
+Environment=DECONZ_TOKEN=A770E045C6
+Environment=DECONZ_APP_PORT=2112
+
+[Install]
+WantedBy=multi-user.target
