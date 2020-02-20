@@ -54,3 +54,17 @@ services:
                 restart: unless-stopped
                 networks:
                         - monitor-net
+
+        deconz:
+                image: marthoc/deconz
+                container_name: deconz
+                volumes:
+                        - '/etc/localtime:/etc/localtime:ro'
+                        - '/opt/deconz:/root/.local/share/dresden-elektronik/deCONZ'
+                devices:
+                        - /dev/ttyACM0
+                environment:
+                        - DECONZ_WEB_PORT=1702
+                        - DECONZ_WS_PORT=8443
+                restart: unless-stopped
+                network_mode: host
