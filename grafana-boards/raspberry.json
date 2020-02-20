@@ -17,7 +17,7 @@
   "gnetId": 11074,
   "graphTooltip": 0,
   "id": 2,
-  "iteration": 1580677486281,
+  "iteration": 1582226890927,
   "links": [
     {
       "asDropdown": false,
@@ -449,7 +449,7 @@
       ],
       "targets": [
         {
-          "expr": "node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext4|xfs\"}-0",
+          "expr": "node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext4|xfs|fuseblk\"}-0",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -458,7 +458,7 @@
           "refId": "C"
         },
         {
-          "expr": "node_filesystem_avail_bytes {instance=~'$node',fstype=~\"ext4|xfs\"}-0",
+          "expr": "snode_filesystem_avail_bytes {instance=~'$node',fstype=~\"ext4|xfs|fuseblk\"}-0",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -468,7 +468,7 @@
           "refId": "A"
         },
         {
-          "expr": "1-(node_filesystem_free_bytes{instance=~'$node',fstype=~\"ext4|xfs\"} / node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext4|xfs\"})",
+          "expr": "1-(node_filesystem_free_bytes{instance=~'$node',fstype=~\"ext4|xfs|fuseblk\"} / node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext4|xfs|fuseblk\"})",
           "format": "table",
           "hide": false,
           "instant": true,
@@ -1231,7 +1231,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "1-(node_filesystem_free_bytes{instance=~'$node',fstype=~\"ext4|xfs\"} / node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext4|xfs\"})",
+          "expr": "1-(node_filesystem_free_bytes{instance=~'$node',fstype=~\"ext4|xfs|fuseblk\"} / node_filesystem_size_bytes{instance=~'$node',fstype=~\"ext4|xfs|fuseblk\"})",
           "format": "time_series",
           "instant": false,
           "intervalFactor": 1,
@@ -1239,7 +1239,7 @@
           "refId": "A"
         },
         {
-          "expr": "node_filesystem_files_free{instance=~'$node',fstype=~\"ext4|xfs\"} / node_filesystem_files{instance=~'$node',fstype=~\"ext4|xfs\"}",
+          "expr": "node_filesystem_files_free{instance=~'$node',fstype=~\"ext4|xfs|fuseblk\"} / node_filesystem_files{instance=~'$node',fstype=~\"ext4|xfs|fuseblk\"}",
           "hide": true,
           "legendFormat": "Inodes：{{instance}}：{{mountpoint}}",
           "refId": "B"
@@ -2268,10 +2268,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_hwmon_temp_celsius{instance=~'$node'}",
+          "expr": "rpi_cpu_temperature_celsius",
           "format": "time_series",
-          "intervalFactor": 10,
-          "legendFormat": "{{instance}}_{{chip}}_{{sensor}}",
+          "intervalFactor": 3,
+          "legendFormat": "{{ instance }}",
           "refId": "A"
         }
       ],
@@ -2491,7 +2491,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -2523,5 +2523,5 @@
   "timezone": "browser",
   "title": "Raspberry Pi",
   "uid": "hb7fSE0Zz",
-  "version": 11
+  "version": 17
 }
