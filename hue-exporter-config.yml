@@ -1,5 +1,5 @@
-ip_address: 192.168.0.1 # Enter the IP address of Philips Hue bridge
-api_key: "<ADD_YOUR_SECRET_TOKEN_HERE>"
+ip_address: 192.168.0.10
+api_key: "-SRRet-6d25AwxTwSnKJe8xDpi3MNra41thISOHl"
 sensors:
   # With `match_names` set, the exporter will set the names of temperature
   # sensors and light level sensors to that of the motion sensor (the one that
