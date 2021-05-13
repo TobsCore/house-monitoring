@@ -1,76 +1,76 @@
 version: "3"
 networks:
-        monitor-net:
-                ipam:
-                        driver: default
-                        config:
-                        - subnet: 172.20.0.0/16
+  monitor-net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/16
 
 services:
-        hue-exporter:
-                image: mitchellrj/hue_exporter:latest-arm7
-                expose:
-                        - "9366"
-                container_name: hue-exporter
-                volumes:
-                        - ./hue-exporter-config.yml:/etc/hue_exporter/config.yml
-                restart: unless-stopped
-                networks:
-                        - monitor-net
+  hue-exporter:
+    image: mitchellrj/hue_exporter:latest-arm7
+    expose:
+      - "9366"
+    container_name: hue-exporter
+    volumes:
+      - ./hue-exporter-config.yml:/etc/hue_exporter/config.yml
+    restart: unless-stopped
+    networks:
+      - monitor-net
 
-        prometheus:
-                image: quay.io/prometheus/prometheus:v2.27.0 
-                command:
-                        - "--config.file=/etc/prometheus/prometheus.yml"
-                        - "--storage.tsdb.path=/prometheus"
-                        -  "--web.console.libraries=/usr/share/prometheus/console_libraries"
-                        -  "--web.console.templates=/usr/share/prometheus/consoles"
-                        - "--storage.tsdb.retention.time=400d"
-                ports:
-                        - "4000:9090/tcp"
-                container_name: prometheus
-                volumes:
-                        - $PWD/data/prometheus:/prometheus
-                        - ./prometheus.yml:/etc/prometheus/prometheus.yml
-                restart: unless-stopped
-                networks:
-                        - monitor-net
-                extra_hosts:
-                        - "dockerhost:172.20.0.1"
+  prometheus:
+    image: quay.io/prometheus/prometheus:v2.27.0
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+      - "--storage.tsdb.retention.time=400d"
+    ports:
+      - "4000:9090/tcp"
+    container_name: prometheus
+    volumes:
+      - $PWD/data/prometheus:/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+    networks:
+      - monitor-net
+    extra_hosts:
+      - "dockerhost:172.20.0.1"
 
-        grafana:
-                image: grafana/grafana:7.5.6
-                ports:
-                        - "3000:3000"
-                container_name: grafana
-                volumes:
-                        - ./data/grafana:/var/lib/grafana/
-                restart: unless-stopped
-                user: "1001:1001"
-                networks:
-                        - monitor-net
+  grafana:
+    image: grafana/grafana:7.0.0
+    ports:
+      - "3000:3000"
+    container_name: grafana
+    volumes:
+      - ./data/grafana:/var/lib/grafana/
+    restart: unless-stopped
+    user: "1001:1001"
+    networks:
+      - monitor-net
 
-        temp-exporter:
-                image: carlosedp/arm_exporter
-                container_name: temp-exporter
-                expose: 
-                        - "9243"
-                ports:
-                        - "9243:9243"
-                restart: unless-stopped
-                networks:
-                        - monitor-net
+  temp-exporter:
+    image: carlosedp/arm_exporter
+    container_name: temp-exporter
+    expose:
+      - "9243"
+    ports:
+      - "9243:9243"
+    restart: unless-stopped
+    networks:
+      - monitor-net
 
-        deconz:
-                image: marthoc/deconz
-                container_name: deconz
-                volumes:
-                        - '/etc/localtime:/etc/localtime:ro'
-                        - '/opt/deconz:/root/.local/share/dresden-elektronik/deCONZ'
-                devices:
-                        - /dev/ttyACM0
-                environment:
-                        - DECONZ_WEB_PORT=1702
-                        - DECONZ_WS_PORT=8443
-                restart: unless-stopped
-                network_mode: host
+  deconz:
+    image: marthoc/deconz
+    container_name: deconz
+    volumes:
+      - "/etc/localtime:/etc/localtime:ro"
+      - "/opt/deconz:/root/.local/share/dresden-elektronik/deCONZ"
+    devices:
+      - /dev/ttyACM0
+    environment:
+      - DECONZ_WEB_PORT=1702
+      - DECONZ_WS_PORT=8443
+    restart: unless-stopped
+    network_mode: host
