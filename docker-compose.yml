@@ -19,7 +19,7 @@ services:
                         - monitor-net
 
         prometheus:
-                image: rycus86/prometheus:armhf
+                image: quay.io/prometheus/prometheus:v2.27.0 
                 command:
                         - "--config.file=/etc/prometheus/prometheus.yml"
                         - "--storage.tsdb.path=/prometheus"
@@ -27,7 +27,7 @@ services:
                         -  "--web.console.templates=/usr/share/prometheus/consoles"
                         - "--storage.tsdb.retention.time=400d"
                 ports:
-                        - "4000:9090"
+                        - "4000:9090/tcp"
                 container_name: prometheus
                 volumes:
                         - $PWD/data/prometheus:/prometheus
