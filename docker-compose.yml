@@ -62,7 +62,7 @@ services:
       - monitor-net
 
   deconz:
-    image: deconzcommunity/deconz
+    image: deconzcommunity/deconz:2.22.00
     container_name: deconz
     network_mode: host
     volumes:
